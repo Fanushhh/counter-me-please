@@ -1,0 +1,15 @@
+.tooltipWrapper{
+    background-color:#2A2438;
+    margin-top:25px;
+    padding:20px;
+    width: 600px;
+    max-width: 100%;
+    cursor: default;
+}
+
+
+
+.skillCost{
+    display:flex;
+    gap:16px;
+}

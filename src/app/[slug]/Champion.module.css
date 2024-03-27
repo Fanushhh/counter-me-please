@@ -1,0 +1,81 @@
+.wrapper{
+    background: linear-gradient(to right,var(--dark-blue), var(--blue));
+    align-items:center;
+    justify-content: flex-start;
+    padding:100px 16px;
+    flex-direction: column;
+    text-align: left;
+}
+
+.championContainer{
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+}
+.championProfile{
+    display:flex;
+    gap:20px;
+    text-align: left;
+    max-width: 1100px;
+    width: 100%;
+}
+.championRoles{
+    display:flex;
+    gap:10px;
+
+}
+.championRoles span{
+    padding:.2rem 1.5rem;
+    border-radius: 10px;
+}
+
+.championSkills h2{
+    margin-bottom:16px;
+}
+.championStats{
+    
+    display:grid;
+    grid-template-columns: repeat(5,1fr);
+    
+}
+.championStats li{
+    border-bottom: 2px solid rgba(255, 215, 0,0.5);
+    
+    padding:.5rem;
+}
+
+.championTips{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:20px;
+
+}
+.allyTips, .enemyTips{
+    padding:1rem;
+}
+.allyTips p, .enemyTips p{
+    border-bottom: 2px solid;
+    font-size:20px;
+    width: fit-content;
+    margin-bottom:1rem;
+}
+.allyTips p{
+    border-color: rgba(0, 255, 0, 0.5);
+}
+.enemyTips p{
+ border-color: rgba(255, 0, 0, 0.5);   
+
+}
+
+@media (max-width:1440px){
+    .championStats{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media (max-width:600px){
+    .championStats{
+        grid-template-columns: repeat(1,1fr);
+    }
+}

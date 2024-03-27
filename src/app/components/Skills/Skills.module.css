@@ -1,0 +1,21 @@
+.skills{
+    display:flex;
+    
+    max-width: 600px;
+    gap:16px;
+    
+    
+    position:relative;
+}
+
+.skill{
+    
+    cursor: pointer;
+}
+
+
+.active{
+    border: 2px solid var(--yellow);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px var(--yellow);
+}
