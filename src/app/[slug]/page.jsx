@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./Champion.module.css";
-
+import { Audio } from "../components/Audio/Audio";
 import { Skills } from "../components/Skills/Skills";
 import Link from "next/link";
 
@@ -9,11 +9,10 @@ async function getChampion(champion) {
     const response = await fetch(
       `https://cdn.communitydragon.org/latest/champion/${champion}/data`,
     );
-    if (response.status !== 200) {
-      return null;
-    }
     const data = await response.json();
-
+      if(!data){
+        return null;
+      }
     return data;
   } catch (error) {
     console.error("Error fetching champion data:", error);
@@ -37,6 +36,9 @@ export async function generateMetadata({ params }) {
 export default async function ChampionPage({ params }) {
   const championData = await getChampion(params.slug);
   const [champion] = await Promise.all([championData]);
+  if (!champion) {
+    return;
+  }
   const backgroundStyle = {
     backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url(http://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/${champion.id}/${champion.skins[0].id}.jpg)`,
     backgroundSize: "cover, cover",
@@ -44,15 +46,11 @@ export default async function ChampionPage({ params }) {
     backgroundPosition: "center",
     backgroundAttachment: "fixed",
   };
-  if (!champion) {
-    return null;
-  }
+  console.log(champion.id)
+  
   return (
     <main className={styles.wrapper} style={backgroundStyle}>
-      <audio
-        autoPlay={true}
-        src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-choose-vo/${champion.id}.ogg`}
-      ></audio>
+      <Audio champion={champion} />
       <section className={styles.championContainer}>
         <Link href="/">Return Home</Link>
         <div className={styles.championProfile}>
@@ -61,7 +59,7 @@ export default async function ChampionPage({ params }) {
             width={125}
             height={125}
             alt={champion.title}
-            src={`http://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${champion.id}.png`}
+            src={`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${champion.id}.png`}
           />
 
           <div>
@@ -83,7 +81,7 @@ export default async function ChampionPage({ params }) {
         </div>
         <div className={styles.championSkills}>
           <h2>Skills</h2>
-          <Skills championName={champion.name} skills={champion.spells} />
+          <Skills championName={params.slug} skills={champion.spells} />
         </div>
         <div className={styles.championLore}>
           <h2>Lore</h2>

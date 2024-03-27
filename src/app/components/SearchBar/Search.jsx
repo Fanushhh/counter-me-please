@@ -24,6 +24,7 @@ export const SearchBar = () => {
           type="search"
           name="searchBar"
           id="searchBar"
+          
           autoComplete="off"
         />
         <button className={styles.searchButton}>
