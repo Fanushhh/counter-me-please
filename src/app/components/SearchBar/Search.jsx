@@ -2,6 +2,7 @@
 import styles from "./Search.module.css";
 import React from "react";
 import { useRouter } from "next/navigation";
+import Hero from "../Hero/Hero";
 
 export const SearchBar = () => {
   const router = useRouter();
@@ -15,13 +16,7 @@ export const SearchBar = () => {
 
   return (
     <section className={styles.formWrapper}>
-      <h1>COUNTER ME PLEASE</h1>
-      <p>
-        This is a website created with the scope of helping you navigate the
-        most difficult matches you’re up against and strengthen your
-        understanding of why a certain champion is stronger than the other and
-        how can you make your life easier and win more matches
-      </p>
+      <Hero />
       <form onSubmit={handleSubmit} className={styles.searchContainer}>
         <input
           className={styles.searchBar}
