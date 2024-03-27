@@ -1,16 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images:{
-        remotePatterns: [
-            {
-
-               hostname: 'ddragon.leagueoflegends.com'
-            },
+    images: {
+      remotePatterns: [
         {
-            hostname:'raw.communitydragon.org',
+          hostname: "ddragon.leagueoflegends.com",
         },
-    ]
-    }
-};
-
-export default nextConfig;
+        {
+          hostname: "raw.communitydragon.org",
+        },
+        {
+          hostname: "cdn.communitydragon.org",
+        },
+      ],
+    },
+  };
+  
+  export default nextConfig;
+  
