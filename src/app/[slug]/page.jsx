@@ -3,6 +3,7 @@ import styles from "./Champion.module.css";
 import { Audio } from "../components/Audio/Audio";
 import { Skills } from "../components/Skills/Skills";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 async function getChampion(champion) {
   try {
@@ -10,9 +11,7 @@ async function getChampion(champion) {
       `https://cdn.communitydragon.org/latest/champion/${champion}/data`,
     );
     const data = await response.json();
-      if(!data){
-        return null;
-      }
+      
     return data;
   } catch (error) {
     console.error("Error fetching champion data:", error);
@@ -22,9 +21,10 @@ async function getChampion(champion) {
 export async function generateMetadata({ params }) {
   const champion = await getChampion(params.slug);
 
-  if (!champion) {
+  if(!champion) {
     return {
-      notFound: true,
+      title: "Champion not found",
+      description: "Champion not found",
     };
   }
   return {
@@ -36,8 +36,8 @@ export async function generateMetadata({ params }) {
 export default async function ChampionPage({ params }) {
   const championData = await getChampion(params.slug);
   const [champion] = await Promise.all([championData]);
-  if (!champion) {
-    return;
+  if(!champion){
+    return notFound();
   }
   const backgroundStyle = {
     backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url(http://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/champion-splashes/${champion.id}/${champion.skins[0].id}.jpg)`,
@@ -46,7 +46,7 @@ export default async function ChampionPage({ params }) {
     backgroundPosition: "center",
     backgroundAttachment: "fixed",
   };
-  console.log(champion.id)
+  
   
   return (
     <main className={styles.wrapper} style={backgroundStyle}>
